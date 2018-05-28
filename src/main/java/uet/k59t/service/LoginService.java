@@ -16,7 +16,7 @@ public class LoginService {
     @Autowired
     private PartnerRepository partnerRepository;
 
-    public UserDTO login(UserDTO userDTO) {
+    public UserDTO login(UserDTO userDTO) {return null;
     }
 
     public void logout() {

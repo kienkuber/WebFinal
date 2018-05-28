@@ -1,12 +1,10 @@
 package uet.k59t.model;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.time.Year;
-import java.util.Date;
+import javax.persistence.Id;
 
 @Entity
 public class Student {
@@ -19,10 +17,10 @@ public class Student {
     private String speciality;
     private String address;
     private String fullName;
-    private Date dob;
+    private String dob;
     private String emailVNU;
     private float meanGrade;
-    private Year gradyear;
+    private String gradyear;
     private String emailPersonal;
     private String skypeID;
     private String facebook;
@@ -136,11 +134,11 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -160,11 +158,11 @@ public class Student {
         this.meanGrade = meanGrade;
     }
 
-    public Year getGradyear() {
+    public String getGradyear() {
         return gradyear;
     }
 
-    public void setGradyear(Year gradyear) {
+    public void setGradyear(String gradyear) {
         this.gradyear = gradyear;
     }
 
