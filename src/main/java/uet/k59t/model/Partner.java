@@ -17,6 +17,11 @@ public class Partner {
     private String description;
     private String token;
     private String address;
+    private static final Role role = Role.PARTNER;
+
+    public static Role getRole() {
+        return role;
+    }
 
     public String getToken() {
         return token;

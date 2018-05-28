@@ -37,6 +37,11 @@ public class Student {
     private String reportURL;
     private String comment;
     private float score;
+    private static final Role role = Role.STUDENT;
+
+    public static Role getRole() {
+        return role;
+    }
 
     public String getReportURL() {
         return reportURL;

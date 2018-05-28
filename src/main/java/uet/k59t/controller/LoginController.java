@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import uet.k59t.controller.dto.UserDTO;
 import uet.k59t.service.LoginService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class LoginController {
     @Autowired
@@ -17,6 +19,8 @@ public class LoginController {
     public UserDTO login(@RequestBody UserDTO userDTO){return loginService.login(userDTO);}
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void logout(){loginService.logout();}
+    public void logout(HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        loginService.logout(token);}
 
 }

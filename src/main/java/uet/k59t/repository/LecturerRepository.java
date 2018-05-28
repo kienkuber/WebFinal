@@ -7,4 +7,5 @@ import uet.k59t.model.Lecturer;
 @Repository
 public interface LecturerRepository extends CrudRepository<Lecturer, Long>{
     Lecturer findByEmailVNU(String email);
+    Lecturer findByToken(String token);
 }

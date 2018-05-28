@@ -7,4 +7,5 @@ import uet.k59t.model.Student;
 @Repository
 public interface StudentRepository extends CrudRepository<Student, Long>{
     Student findByEmailVNU(String email);
+    Student findByToken(String token);
 }

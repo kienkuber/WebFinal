@@ -18,6 +18,11 @@ public class Lecturer {
     private String note;
     private String password;
     private String token;
+    private static final Role role = Role.LECTURER;
+
+    public Role getRole() {
+        return role;
+    }
 
     public String getPassword() {
         return password;

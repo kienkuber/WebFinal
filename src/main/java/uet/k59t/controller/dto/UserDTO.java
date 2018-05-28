@@ -1,11 +1,31 @@
 package uet.k59t.controller.dto;
 
+import uet.k59t.model.Role;
+
 /**
  * Created by Long on 11/21/2016.
  */
 public class UserDTO {
     private String userName;
     private String password;
+    private String token;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getUserName() {
         return userName;

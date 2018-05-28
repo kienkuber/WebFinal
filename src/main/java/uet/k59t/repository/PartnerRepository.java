@@ -7,4 +7,5 @@ import uet.k59t.model.Partner;
 @Repository
 public interface PartnerRepository extends CrudRepository<Partner, Long> {
     Partner findByUsername(String username);
+    Partner findByToken(String token);
 }
