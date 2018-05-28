@@ -8,6 +8,7 @@ import uet.k59t.repository.LecturerRepository;
 import uet.k59t.repository.PartnerRepository;
 import uet.k59t.repository.StudentRepository;
 
+import javax.validation.constraints.Null;
 import java.util.UUID;
 
 @Service
@@ -38,6 +39,7 @@ public class LoginService {
                 result.setToken(student.getToken());
                 return result;
             }
+            else throw new NullPointerException("Mat khau khong chinh xac");
         }
         else if(lecturerRepository.findByEmailVNU(userDTO.getUserName()) != null){
             Lecturer lecturer = lecturerRepository.findByEmailVNU(userDTO.getUserName());
@@ -50,6 +52,7 @@ public class LoginService {
                 result.setToken(lecturer.getToken());
                 return result;
             }
+            else throw new NullPointerException("Mat khau khong chinh xac");
         }
         else if(partnerRepository.findByUsername(userDTO.getUserName())!= null){
             Partner partner = partnerRepository.findByUsername(userDTO.getUserName());
@@ -62,9 +65,9 @@ public class LoginService {
                 result.setToken(partner.getToken());
                 return result;
             }
+            else throw new NullPointerException("Mat khau khong chinh xac");
         }
         else throw  new NullPointerException("Ten dang nhap hoac mat khau khong dung");
-        return null;
     }
 
     public void logout(String token) {
@@ -87,5 +90,34 @@ public class LoginService {
             partnerRepository.save(partner);
         }
 
+    }
+
+    public UserDTO changePassword(UserDTO userDTO, String token) {
+        if (studentRepository.findByToken(token) != null) {
+            Student student = studentRepository.findByToken(token);
+            student.setPassword(userDTO.getPassword());
+            studentRepository.save(student);
+            UserDTO result = new UserDTO();
+            result.setUserName(student.getEmailVNU());
+            result.setPassword(student.getPassword());
+            return result;
+        } else if (lecturerRepository.findByToken(token) != null) {
+            Lecturer lecturer = lecturerRepository.findByToken(token);
+            lecturer.setPassword(userDTO.getPassword());
+            lecturerRepository.save(lecturer);
+            UserDTO result = new UserDTO();
+            result.setUserName(lecturer.getEmailVNU());
+            result.setPassword(lecturer.getPassword());
+            return result;
+        } else if (partnerRepository.findByToken(token) != null){
+            Partner partner = partnerRepository.findByToken(token);
+            partner.setPassword(userDTO.getPassword());
+            partnerRepository.save(partner);
+            UserDTO result = new UserDTO();
+            result.setUserName(partner.getUsername());
+            result.setPassword(partner.getPassword());
+            return result;
+        }
+        else throw new NullPointerException("khong tim thay User");
     }
 }

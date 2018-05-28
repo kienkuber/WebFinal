@@ -21,6 +21,13 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void logout(HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("auth-token");
-        loginService.logout(token);}
+        loginService.logout(token);
+    }
+
+    @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+    public UserDTO changePassword(@RequestBody UserDTO userDTO, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return loginService.changePassword(userDTO, token);
+    }
 
 }
