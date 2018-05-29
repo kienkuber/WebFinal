@@ -2,8 +2,10 @@ package uet.k59t.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import uet.k59t.controller.dto.LecturerDTO;
 import uet.k59t.controller.dto.StudentDTO;
 import uet.k59t.controller.dto.StudentDTOView;
+import uet.k59t.model.Lecturer;
 import uet.k59t.service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +31,11 @@ public class AdminController {
         return adminService.createStudent(studentDTO, token);
     }
 
-    //Xoa sinh vien
-    @RequestMapping(value = "/delete/student", method = RequestMethod.POST)
-    public StudentDTO deleteStudent(@RequestBody StudentDTO studentDTO, HttpServletRequest httpServletRequest){
+    //Delete sinh vien
+    @RequestMapping(value = "/delete/student/{studentId}", method = RequestMethod.GET)
+    public void deleteStudent(@PathVariable("studentId") Long id, HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("auth-token");
-        return adminService.deleteStudent(studentDTO, token);
+        adminService.deleteStudent(id, token);
     }
 
     //Xem danh sach sinh vien
@@ -53,14 +55,32 @@ public class AdminController {
 
     //CRUD Giang vien
     //Create giang vien
+    @RequestMapping(value = "/create/lecturer", method = RequestMethod.POST)
+    public LecturerDTO createLecturer(@RequestBody LecturerDTO lecturerDTO, HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.createLecturer(lecturerDTO, token);
+    }
 
     //Update giang vien
-
+    @RequestMapping(value = "/update/lecturer", method = RequestMethod.POST)
+    public LecturerDTO updateLecturer(@RequestBody LecturerDTO lecturerDTO, HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.createLecturer(lecturerDTO, token);
+    }
     //Delete giang vien
+    @RequestMapping(value = "/delete/lecturer/{lecturerId}", method = RequestMethod.GET)
+    public void deleteLecturer(@PathVariable("lecturerId") Long id, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        adminService.deleteLecturer(id, token);
+    }
 
-    //Xem danh sach giang vien
+    //Xem danh sach thong tin giang vien
+    @RequestMapping(value = "/read/alllecturers", method = RequestMethod.GET)
+    public List<LecturerDTO> viewAllLecturer(HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.viewAllLecturer(token);
+    }
 
-    //Xem thong tin tung giang vien
 
 
     //CRUD Partner
