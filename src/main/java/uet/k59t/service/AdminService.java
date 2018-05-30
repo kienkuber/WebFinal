@@ -4,15 +4,18 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uet.k59t.controller.dto.LecturerDTO;
+import uet.k59t.controller.dto.PartnerDTO;
 import uet.k59t.controller.dto.StudentDTO;
 import uet.k59t.controller.dto.StudentDTOView;
 import uet.k59t.model.Admin;
 import uet.k59t.model.Lecturer;
+import uet.k59t.model.Partner;
 import uet.k59t.model.Student;
 import uet.k59t.repository.LecturerRepository;
 import uet.k59t.repository.PartnerRepository;
 import uet.k59t.repository.StudentRepository;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,5 +156,52 @@ public class AdminService {
         }
         else throw new NullPointerException("Khong co quyen nay");
     }
+
+    //CRUD Partner
+    //Create and update partner
+    public PartnerDTO createPartner(PartnerDTO partnerDTO, String token) {
+        if(token.equals(Admin.getToken())){
+            if(partnerRepository.findByEmail(partnerDTO.getEmail()) != null){
+                Partner partner = partnerRepository.findByEmail(partnerDTO.getEmail());
+                BeanUtils.copyProperties(partnerDTO, partner);
+                return partnerDTO;
+            }
+            else{
+                Partner partner = new Partner();
+                BeanUtils.copyProperties(partnerDTO, partner);
+                partnerRepository.save(partner);
+                return partnerDTO;
+            }
+        }
+        else throw new NullPointerException("Khong co quyen nay");
+    }
+
+    //Delete partner
+    public void deletePartner(Long id, String token) {
+        if(token.equals(Admin.getToken())){
+            if(partnerRepository.findOne(id)!= null){
+                partnerRepository.delete(id);
+            }
+            else throw new NullPointerException("Partner khong ton tai");
+        }
+        else throw new NullPointerException("Khong co quyen nay");
+    }
+
+    //View partner
+    public List<PartnerDTO> viewAllPartner(String token) {
+        if(token.equals(Admin.getToken())){
+            List<PartnerDTO> partnerDTOList = new ArrayList<>();
+            List<Partner> partnerList = partnerRepository.findAll();
+            for(int i = 0; i < partnerList.size(); i++){
+                PartnerDTO partnerDTO = new PartnerDTO();
+                BeanUtils.copyProperties(partnerList.get(i), partnerDTO);
+                partnerDTOList.add(partnerDTO);
+            }
+            return partnerDTOList;
+        }
+        else throw new NullPointerException("Khong co quyen nay");
+    }
+
+
 
 }

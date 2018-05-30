@@ -3,9 +3,9 @@ package uet.k59t.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uet.k59t.controller.dto.LecturerDTO;
+import uet.k59t.controller.dto.PartnerDTO;
 import uet.k59t.controller.dto.StudentDTO;
 import uet.k59t.controller.dto.StudentDTOView;
-import uet.k59t.model.Lecturer;
 import uet.k59t.service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,17 +81,30 @@ public class AdminController {
         return adminService.viewAllLecturer(token);
     }
 
-
-
     //CRUD Partner
     //Create partner
-
+    @RequestMapping(value = "/create/partner", method = RequestMethod.POST)
+    public PartnerDTO createPartner(@RequestBody PartnerDTO partnerDTO, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.createPartner(partnerDTO, token);
+    }
     //Update partner
-
+    @RequestMapping(value = "/update/partner", method = RequestMethod.POST)
+    public PartnerDTO updatePartner(@RequestBody PartnerDTO partnerDTO, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.createPartner(partnerDTO, token);
+    }
     //Delete partner
+    @RequestMapping(value = "/delete/partner/{partnerID}", method = RequestMethod.GET)
+    public void deletePartner(@PathVariable("partnerID") Long id, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        adminService.deletePartner(id, token);
+    }
 
-    //Xem danh sach partner
-
-    //Xem thong tin tung partner
-
+    //Xem danh sach thong tin partner
+    @RequestMapping(value = "/read/allpartners", method = RequestMethod.GET)
+    public List<PartnerDTO> viewPartner(HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.viewAllPartner(token);
+    }
 }
