@@ -13,8 +13,8 @@ public class Job {
 
     private String jobName;
     private String jobReq;
-    private String partnerId;
-    private String lecturerId;
+    private Long partnerId;
+    private Long lecturerId;
 
     public Long getId() {
         return id;
@@ -40,19 +40,20 @@ public class Job {
         this.jobReq = jobReq;
     }
 
-    public String getPartnerId() {
-        return partnerId;
-    }
-
-    public void setPartnerId(String partnerId) {
-        this.partnerId = partnerId;
-    }
-
-    public String getLecturerId() {
+    public Long getLecturerId() {
         return lecturerId;
     }
 
-    public void setLecturerId(String lecturerId) {
+    public void setLecturerId(Long lecturerId) {
         this.lecturerId = lecturerId;
+    }
+
+    public Long getPartnerId() {
+
+        return partnerId;
+    }
+
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
     }
 }
