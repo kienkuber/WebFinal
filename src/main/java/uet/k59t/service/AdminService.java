@@ -3,14 +3,8 @@ package uet.k59t.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uet.k59t.controller.dto.LecturerDTO;
-import uet.k59t.controller.dto.PartnerDTO;
-import uet.k59t.controller.dto.StudentDTO;
-import uet.k59t.controller.dto.StudentDTOView;
-import uet.k59t.model.Admin;
-import uet.k59t.model.Lecturer;
-import uet.k59t.model.Partner;
-import uet.k59t.model.Student;
+import uet.k59t.controller.dto.*;
+import uet.k59t.model.*;
 import uet.k59t.repository.LecturerRepository;
 import uet.k59t.repository.PartnerRepository;
 import uet.k59t.repository.StudentRepository;
@@ -203,5 +197,12 @@ public class AdminService {
     }
 
 
-
+    public Season createSeason(SeasonDTO seasonDTO, String token) {
+        if(token.equals(Admin.getToken())){
+            Season season = new Season();
+            BeanUtils.copyProperties(seasonDTO, season);
+            return season;
+        }
+        else throw new NullPointerException("Khong co quyen nay");
+    }
 }

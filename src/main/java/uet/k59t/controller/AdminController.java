@@ -2,10 +2,8 @@ package uet.k59t.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uet.k59t.controller.dto.LecturerDTO;
-import uet.k59t.controller.dto.PartnerDTO;
-import uet.k59t.controller.dto.StudentDTO;
-import uet.k59t.controller.dto.StudentDTOView;
+import uet.k59t.controller.dto.*;
+import uet.k59t.model.Season;
 import uet.k59t.service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,5 +104,13 @@ public class AdminController {
     public List<PartnerDTO> viewPartner(HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("auth-token");
         return adminService.viewAllPartner(token);
+    }
+
+    //Khoa thuc tap
+    //Admin tao khoa thuc tap
+    @RequestMapping(value = "/create/season", method = RequestMethod.POST)
+    public Season createSeason(@RequestBody SeasonDTO seasonDTO, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return adminService.createSeason(seasonDTO, token);
     }
 }
