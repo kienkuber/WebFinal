@@ -4,37 +4,38 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uet.k59t.controller.dto.JobDTO;
-import uet.k59t.controller.dto.LecturerDTO;
+import uet.k59t.controller.dto.PartnerDTO;
 import uet.k59t.model.Job;
-import uet.k59t.model.Lecturer;
+import uet.k59t.model.Partner;
 import uet.k59t.repository.JobRepository;
-import uet.k59t.repository.LecturerRepository;
+import uet.k59t.repository.PartnerRepository;
 import uet.k59t.repository.StudentRepository;
 
 @Service
-public class LecturerService {
+public class PartnerService {
     @Autowired
-    private LecturerRepository lecturerRepository;
+    private PartnerRepository partnerRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private JobRepository jobRepository;
 
-    public LecturerDTO updateInfo(LecturerDTO lecturerDTO, String token) {
-        if(lecturerRepository.findByToken(token)!=null){
-            Lecturer lecturer = lecturerRepository.findByToken(token);
-            BeanUtils.copyProperties(lecturerDTO, lecturer);
-            return lecturerDTO;
+
+    public PartnerDTO updateInfo(PartnerDTO partnerDTO, String token) {
+        if(partnerRepository.findByToken(token)!=null){
+            Partner partner = partnerRepository.findByToken(token);
+            BeanUtils.copyProperties(partnerDTO, partner);
+            partnerRepository.save(partner);
+            return partnerDTO;
         }
-        else throw new NullPointerException("Khong tim thay giao vien");
+        else throw new NullPointerException("Khong tim thay Partner");
     }
 
-
     public JobDTO createJob(JobDTO jobDTO, String token) {
-        if(lecturerRepository.findByToken(token)!=null){
+        if(partnerRepository.findByToken(token)!= null){
             Job job = new Job();
             BeanUtils.copyProperties(jobDTO, job);
-            job.setLecturerId(lecturerRepository.findByToken(token).getId());
+            job.setPartnerId(partnerRepository.findByToken(token).getId());
             jobRepository.save(job);
             return jobDTO;
         }
