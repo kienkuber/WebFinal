@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Job {
@@ -15,6 +16,24 @@ public class Job {
     private String jobReq;
     private Long partnerId;
     private Long lecturerId;
+    private Integer jobAvailable;
+    private Integer jobLeft;
+
+    public Integer getJobAvailable() {
+        return jobAvailable;
+    }
+
+    public void setJobAvailable(Integer jobAvailable) {
+        this.jobAvailable = jobAvailable;
+    }
+
+    public Integer getJobLeft() {
+        return jobLeft;
+    }
+
+    public void setJobLeft(Integer jobLeft) {
+        this.jobLeft = jobLeft;
+    }
 
     public Long getId() {
         return id;

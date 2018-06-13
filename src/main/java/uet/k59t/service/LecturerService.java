@@ -40,4 +40,6 @@ public class LecturerService {
         }
         else throw new NullPointerException("Khong co quyen nay");
     }
+
+
 }

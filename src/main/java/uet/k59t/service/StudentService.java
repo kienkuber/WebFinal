@@ -7,24 +7,19 @@ import uet.k59t.controller.dto.JobDTO;
 import uet.k59t.controller.dto.StudentDTOView;
 import uet.k59t.model.Job;
 import uet.k59t.model.Student;
-import uet.k59t.repository.JobRepository;
-import uet.k59t.repository.LecturerRepository;
-import uet.k59t.repository.PartnerRepository;
-import uet.k59t.repository.StudentRepository;
+import uet.k59t.model.StudentJob;
+import uet.k59t.repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentService {
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private LecturerRepository lecturerRepository;
-    @Autowired
-    private PartnerRepository partnerRepository;
-    @Autowired
-    private JobRepository jobRepository;
+    @Autowired private StudentRepository studentRepository;
+    @Autowired private LecturerRepository lecturerRepository;
+    @Autowired private PartnerRepository partnerRepository;
+    @Autowired private JobRepository jobRepository;
+    @Autowired private StudentJobRepository studentJobRepository;
 
     public List<JobDTO> viewJobs(String token) {
         if(studentRepository.findByToken(token)!=null){
@@ -49,5 +44,21 @@ public class StudentService {
             return studentDTOView;
         }
         else throw new NullPointerException("Khong tim thay Student");
+    }
+
+    public JobDTO registryJob(long jobId, String token) {
+        if(studentRepository.findByToken(token)!=null){
+            Student student = studentRepository.findByToken(token);
+            StudentJob studentJob = new StudentJob();
+            if(studentJobRepository.findByStudentIdAndJobId(student.getId(), jobId)==null) {
+                studentJob.setJobId(jobId);
+                studentJob.setStudentId(student.getId());
+                JobDTO jobDTO = new JobDTO();
+                BeanUtils.copyProperties(jobRepository.findOne(jobId), jobDTO);
+                return jobDTO;
+            }
+            else throw new NullPointerException("Da dang ki cong viec nay tu truoc!");
+        }
+        else throw new NullPointerException("Khong co quyen nay");
     }
 }

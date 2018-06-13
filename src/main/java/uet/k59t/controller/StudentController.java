@@ -28,4 +28,10 @@ public class StudentController {
         String token = httpServletRequest.getHeader("auth-token");
         return studentService.viewJobs(token);
     }
+
+    @RequestMapping(value = "/job/registry/{jobId}", method = RequestMethod.GET)
+    public JobDTO registryJob(@RequestBody long jobId, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return studentService.registryJob(jobId, token);
+    }
 }
