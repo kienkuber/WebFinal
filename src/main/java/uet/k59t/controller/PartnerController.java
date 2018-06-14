@@ -34,7 +34,11 @@ public class PartnerController {
     public List<JobStudentDTO> viewRegisteredStudent(HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("auth-token");
         return partnerService.viewRegisteredStudent(token);
+    }
 
-
+    @RequestMapping(value = "/partner/acceptregistry", method = RequestMethod.POST)
+    public JobStudentDTO acceptRegistry(@RequestBody JobStudentDTO jobStudentDTO, HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("auth-token");
+        return partnerService.acceptRegistry(jobStudentDTO, token);
     }
 }

@@ -113,4 +113,6 @@ public class AdminController {
         String token = httpServletRequest.getHeader("auth-token");
         return adminService.createSeason(seasonDTO, token);
     }
+
+
 }

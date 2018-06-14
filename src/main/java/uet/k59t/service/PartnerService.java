@@ -21,10 +21,8 @@ import java.util.List;
 
 @Service
 public class PartnerService {
-    @Autowired
-    private PartnerRepository partnerRepository;
-    @Autowired
-    private StudentRepository studentRepository;
+    @Autowired private PartnerRepository partnerRepository;
+    @Autowired private StudentRepository studentRepository;
     @Autowired private JobRepository jobRepository;
     @Autowired private StudentJobRepository studentJobRepository;
 
@@ -73,6 +71,16 @@ public class PartnerService {
                 jobStudentDTOS.add(jobStudentDTO);
             }
             return jobStudentDTOS;
+        }
+        else throw new NullPointerException("Khong co quyen nay");
+    }
+
+    public JobStudentDTO acceptRegistry(JobStudentDTO jobStudentDTO, String token) {
+        if(partnerRepository.findByToken(token)!=null){
+            Student student = studentRepository.findOne(jobStudentDTO.getStudentDTO().getId());
+            student.setJobId(jobStudentDTO.getJobId());
+            studentRepository.save(student);
+            return jobStudentDTO;
         }
         else throw new NullPointerException("Khong co quyen nay");
     }
