@@ -7,6 +7,24 @@ public class JobDTO {
     private String jobReq;
     private String partnerId;
     private String lecturerId;
+    private Integer jobAvailable;
+    private Integer jobLeft;
+
+    public Integer getJobAvailable() {
+        return jobAvailable;
+    }
+
+    public void setJobAvailable(Integer jobAvailable) {
+        this.jobAvailable = jobAvailable;
+    }
+
+    public Integer getJobLeft() {
+        return jobLeft;
+    }
+
+    public void setJobLeft(Integer jobLeft) {
+        this.jobLeft = jobLeft;
+    }
 
     public Long getId() {
         return id;

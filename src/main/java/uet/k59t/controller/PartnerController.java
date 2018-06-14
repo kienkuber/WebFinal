@@ -15,8 +15,7 @@ import java.util.List;
 
 @RestController
 public class PartnerController {
-    @Autowired
-    private PartnerService partnerService;
+    @Autowired private PartnerService partnerService;
 
     @RequestMapping(value = "/partner/update", method = RequestMethod.POST)
     public PartnerDTO updateInfo(@RequestBody PartnerDTO partnerDTO, HttpServletRequest httpServletRequest){

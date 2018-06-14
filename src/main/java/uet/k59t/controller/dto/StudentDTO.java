@@ -21,6 +21,16 @@ public class StudentDTO {
     private float meanGrade;
     private String gradYear;
     private String address;
+    private Long teacherId;
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public String getAddress() {
         return address;
     }

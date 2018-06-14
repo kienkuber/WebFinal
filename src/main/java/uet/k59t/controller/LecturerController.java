@@ -32,13 +32,13 @@ public class LecturerController {
         return lecturerService.createJob(jobDTO, token);
     }
 
-    @RequestMapping(value = "/partner/view/registry", method = RequestMethod.GET)
+    @RequestMapping(value = "/lecturer/view/registry", method = RequestMethod.GET)
     public List<JobStudentDTO> viewRegisteredStudent(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader("auth-token");
         return lecturerService.viewRegisteredStudent(token);
     }
 
-    @RequestMapping(value = "/partner/acceptregistry", method = RequestMethod.POST)
+    @RequestMapping(value = "/lecturer/acceptregistry", method = RequestMethod.POST)
     public JobStudentDTO acceptRegistry(@RequestBody JobStudentDTO jobStudentDTO, HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("auth-token");
         return lecturerService.acceptRegistry(jobStudentDTO, token);
